@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// 연결 리스트의 노드 구조체 정의
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// 노드를 추가하는 함수
+void append(struct Node** headRef, int newData) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = newData;
+    newNode->next = NULL;
+    
+    if (*headRef == NULL) {
+        *headRef = newNode;
+        return;
+    }
+
+    struct Node* current = *headRef;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    current->next = newNode;
+}
+
+// 연결 리스트를 출력하는 함수
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d -> ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* myList = NULL;
+
+    // 연결 리스트에 데이터 추가
+    append(&myList, 1);
+    append(&myList, 2);
+    append(&myList, 3);
+
+    // 연결 리스트 출력
+    printf("Linked List: ");
+    printList(myList);
+
+    // 메모리 해제
+    struct Node* current = myList;
+    while (current != NULL) {
+        struct Node* next = current->next;
+        free(current);
+        current = next;
+    }
+
+    return 0;
+}
+
+연결 리스트를 구현하고, 노드를 추가하고 출력한 뒤 메모리를 해제하는 프로그램이다.
+연결 리스트의 기본 동작을 보여주고 동적 메모리 할당 및 해제의 개념을 표현했다.
