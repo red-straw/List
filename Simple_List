@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct list {
+    int val;
+    struct list* next;
+}LIST;
+int main() {
+    LIST* head, *my1, *my2, *my3;
+    my1 = (LIST*)malloc(sizeof(LIST));
+    my2 = (LIST*)malloc(sizeof(LIST));
+    my1->val = 5;  my1->next = my2;
+    my2->val = 8;  my2->next = NULL;
+ 
+    // 출력
+    head = my1;
+    while (head) {
+        printf("%d\n", head->val);
+        head = head->next;
+    }
+    return 0;
+}
